@@ -24,7 +24,7 @@ class QAAudit:
     def add_check(self, category, name, passed, details="", weight=1):
         status = "PASS" if passed else "FAIL"
         self.results[category]["checks"].append({
-            "name": name, "status": status, "details": details
+            "name": name, "status": status, "details": details, "weight": weight
         })
         if passed:
             self.results[category]["score"] += weight
@@ -71,13 +71,13 @@ class QAAudit:
 
         version = data.get("version", "")
         semver = bool(re.match(r'^v?\d+\.\d+\.\d+', version))
-        self.add_check("extension_structure", "SemVer format", semver, version, 1)
+        self.add_check("extension_structure", "SemVer format", semver, version, 2)
 
         has_license = bool(data.get("license"))
         self.add_check("extension_structure", "License declared", has_license, data.get("license", "missing"), 1)
 
         has_author = bool(data.get("authors"))
-        self.add_check("extension_structure", "Author present", has_author, "", 1)
+        self.add_check("extension_structure", "Author present", has_author, "", 2)
 
         extra = data.get("extra", {})
         labels = extra.get("label", {})
@@ -133,17 +133,19 @@ class QAAudit:
         self.add_check("store_review", "No PHP debug output", len(php_matches) == 0,
                        f"Found: {', '.join(php_matches[:3])}" if php_matches else "Clean", 2)
 
-        # JS console.log in source (exclude dist)
+        # JS console.log in source (exclude dist and node_modules)
         js_source_matches = []
         for filepath in self.find_files("**/src/**/*.js"):
+            rel = os.path.relpath(filepath, self.plugin_dir)
+            if '/dist/' in rel or 'node_modules' in rel:
+                continue
             content = self.read_file(filepath)
             for i, line in enumerate(content.split('\n'), 1):
                 if re.search(r'console\.(log|warn|error)\s*\(', line) and '//' not in line.split('console')[0]:
-                    rel = os.path.relpath(filepath, self.plugin_dir)
                     js_source_matches.append(f"{rel}:{i}")
 
         self.add_check("store_review", "No console.log in JS source", len(js_source_matches) == 0,
-                       f"Found: {', '.join(js_source_matches[:3])}" if js_source_matches else "Clean", 3)
+                       f"Found: {', '.join(js_source_matches[:3])}" if js_source_matches else "Clean", 4)
 
         # JS console.log in dist (plugin-specific only)
         dist_matches = []
@@ -161,7 +163,7 @@ class QAAudit:
     def check_no_dangerous_functions(self):
         matches = self.search_files(r'\b(eval|shell_exec|exec|system|passthru)\s*\(', ["php"])
         self.add_check("store_review", "No eval/shell_exec", len(matches) == 0,
-                       f"Found: {', '.join(matches[:3])}" if matches else "Clean", 3)
+                       f"Found: {', '.join(matches[:3])}" if matches else "Clean", 2)
 
     def check_no_raw_filter(self):
         matches = self.search_files(r'\|raw\b', ["twig"])
@@ -241,7 +243,7 @@ class QAAudit:
         inline_handlers = self.search_files(r'\bon(click|change|submit|load)\s*=', ["twig"])
         passed = len(inline_scripts) == 0 and len(inline_handlers) == 0
         self.add_check("store_review", "CSP compliant", passed,
-                       "No inline scripts/handlers" if passed else f"Found issues", 2)
+                       "No inline scripts/handlers" if passed else f"Found issues", 3)
 
     # ── Deprecated APIs ──
 
@@ -468,9 +470,26 @@ class QAAudit:
         self.check_error_handling()
         self.check_twig_blocks()
 
-        # Calculate totals
-        total_score = sum(c["score"] for c in self.results.values())
-        total_max = sum(c["max"] for c in self.results.values())
+        # Recalculate max from actual check weights
+        for cat in self.results.values():
+            actual_max = sum(c.get("weight", 1) for c in cat["checks"])
+            cat["max"] = actual_max
+
+        # Calculate raw totals
+        raw_score = sum(c["score"] for c in self.results.values())
+        raw_max = sum(c["max"] for c in self.results.values())
+
+        # Normalize to /100 scale
+        total_score = round((raw_score / raw_max) * 100) if raw_max else 0
+        total_max = 100
+
+        # Scale category scores proportionally
+        target_maxes = {"extension_structure": 25, "store_review": 35, "deprecated_apis": 25, "coding_standards": 15}
+        for key, cat in self.results.items():
+            if cat["max"] > 0:
+                ratio = cat["score"] / cat["max"]
+                cat["score"] = round(ratio * target_maxes[key])
+                cat["max"] = target_maxes[key]
 
         grade = "F"
         if total_score >= 90: grade = "A"

@@ -28,7 +28,7 @@ jobs:
 
       - name: Clone plugin repo
         run: |
-          git clone https://github.com/${{ matrix.plugin.repo }}.git plugin-source
+          git clone https://${{ secrets.GH_TOKEN }}@github.com/${{ matrix.plugin.repo }}.git plugin-source
 
       - name: Set up Python
         uses: actions/setup-python@v5

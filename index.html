@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iCreativetechnologies — Shopware Plugins</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+            background: #f0f4f8;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .header .logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            object-fit: contain;
+        }
+        .header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .subtitle {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+        .subtitle a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .subtitle a:hover {
+            text-decoration: underline;
+        }
+
+        /* Table */
+        .plugin-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+        }
+        .plugin-table th {
+            text-align: left;
+            padding: 0.85rem 1.25rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .plugin-table td {
+            padding: 0.85rem 1.25rem;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: middle;
+        }
+        .plugin-table tr:last-child td {
+            border-bottom: none;
+        }
+        .plugin-table tbody tr:hover td {
+            background: #f8fafc;
+        }
+        .plugin-table td:first-child {
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        /* Version badge */
+        .version {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        /* Compatibility badge */
+        .compat {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: #f0fdf4;
+            color: #15803d;
+        }
+
+        /* View link */
+        .view-link {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .view-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #94a3b8;
+            font-size: 0.8rem;
+        }
+        .footer a {
+            color: #94a3b8;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+        <img src="ict.png" alt="iCreativetechnologies" class="logo">
+        <h1>— Shopware Plugins</h1>
+    </div>
+    <p class="subtitle">
+        Shopware 6 plugins by iCreativetechnologies —
+        <a href="https://www.icreativetechnologies.com" target="_blank">icreativetechnologies.com</a>
+    </p>
+
+    <!-- Plugins Table -->
+    <table class="plugin-table">
+        <thead>
+            <tr>
+                <th>Plugin</th>
+                <th>Description</th>
+                <th>Version</th>
+                <th>Shopware</th>
+                <th>Repository</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>ICTECH_ListGridView</td>
+                <td>List view and Grid view for Product Listing Page</td>
+                <td><span class="version">v4.0.3</span></td>
+                <td><span class="compat">6.7+</span></td>
+                <td><a class="view-link" href="https://github.com/ict-store/ICTECH_ListGridView" target="_blank">View repo</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Footer -->
+    <div class="footer">
+        <a href="https://www.icreativetechnologies.com">&copy; iCreativetechnologies</a>
+    </div>
+
+</div>
+</body>
+</html>

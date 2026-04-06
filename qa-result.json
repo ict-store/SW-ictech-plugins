@@ -1,0 +1,243 @@
+{
+  "plugin_dir": "plugin-source",
+  "date": "2026-04-06",
+  "score": 90,
+  "max": 100,
+  "grade": "A",
+  "categories": {
+    "extension_structure": {
+      "score": 22,
+      "max": 25,
+      "checks": [
+        {
+          "name": "composer.json valid",
+          "status": "PASS",
+          "details": "All required fields present"
+        },
+        {
+          "name": "Plugin name present",
+          "status": "PASS",
+          "details": "ict/ictechlistgridview"
+        },
+        {
+          "name": "Plugin type correct",
+          "status": "PASS",
+          "details": "shopware-platform-plugin"
+        },
+        {
+          "name": "SemVer format",
+          "status": "PASS",
+          "details": "v4.0.3"
+        },
+        {
+          "name": "License declared",
+          "status": "PASS",
+          "details": "proprietary"
+        },
+        {
+          "name": "Author present",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "name": "Multilingual labels",
+          "status": "PASS",
+          "details": "de-DE + en-GB"
+        },
+        {
+          "name": "Multilingual descriptions",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "name": "Plugin icon exists",
+          "status": "PASS",
+          "details": "ict.png"
+        },
+        {
+          "name": "PSR-4 autoload",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "name": "CHANGELOG.md present",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "name": "CHANGELOG has dates",
+          "status": "PASS",
+          "details": "Dates found"
+        },
+        {
+          "name": "Manufacturer & support links",
+          "status": "PASS",
+          "details": ""
+        }
+      ]
+    },
+    "store_review": {
+      "score": 28,
+      "max": 35,
+      "checks": [
+        {
+          "name": "No hardcoded credentials",
+          "status": "PASS",
+          "details": "Clean"
+        },
+        {
+          "name": "No PHP debug output",
+          "status": "PASS",
+          "details": "Clean"
+        },
+        {
+          "name": "No console.log in JS source",
+          "status": "FAIL",
+          "details": "Found: src/Resources/app/storefront/dist/storefront/js/i-c-t-e-c-h--list-grid-view/i-c-t-e-c-h--list-grid-view.js:1"
+        },
+        {
+          "name": "No console.log in JS dist",
+          "status": "PASS",
+          "details": "Dist rebuilt clean"
+        },
+        {
+          "name": "No eval/shell_exec",
+          "status": "PASS",
+          "details": "Clean"
+        },
+        {
+          "name": "No |raw filter in Twig",
+          "status": "PASS",
+          "details": "Clean"
+        },
+        {
+          "name": "Admin snippet files present",
+          "status": "PASS",
+          "details": "en-GB: 2, de-DE: 2"
+        },
+        {
+          "name": "Storefront snippet files present",
+          "status": "PASS",
+          "details": "en: 1, de: 1"
+        },
+        {
+          "name": "CSS via SCSS",
+          "status": "PASS",
+          "details": "4 SCSS files"
+        },
+        {
+          "name": "No inline styles in Twig",
+          "status": "PASS",
+          "details": "Clean"
+        },
+        {
+          "name": "No external HTTP requests",
+          "status": "PASS",
+          "details": "Clean"
+        },
+        {
+          "name": "Proper JS plugin registration",
+          "status": "PASS",
+          "details": "PluginManager.register() found"
+        },
+        {
+          "name": "Translatable JS strings",
+          "status": "PASS",
+          "details": "data attributes with |trans used"
+        },
+        {
+          "name": "CSP compliant",
+          "status": "PASS",
+          "details": "No inline scripts/handlers"
+        }
+      ]
+    },
+    "deprecated_apis": {
+      "score": 25,
+      "max": 25,
+      "checks": [
+        {
+          "name": "config.xml XSD schema",
+          "status": "PASS",
+          "details": "Uses trunk URL"
+        },
+        {
+          "name": "routes.xml schema",
+          "status": "PASS",
+          "details": "Symfony routing-1.0.xsd"
+        },
+        {
+          "name": "services.xml schema",
+          "status": "PASS",
+          "details": "Symfony services-1.0.xsd"
+        },
+        {
+          "name": "No deprecated PHP classes",
+          "status": "PASS",
+          "details": "All current APIs"
+        },
+        {
+          "name": "Modern PHP routing",
+          "status": "PASS",
+          "details": "PHP 8 #[Route()] attributes"
+        },
+        {
+          "name": "Feature flag compatibility",
+          "status": "PASS",
+          "details": "feature() used in Twig"
+        },
+        {
+          "name": "No deprecated admin components",
+          "status": "PASS",
+          "details": "Uses current registration API"
+        }
+      ]
+    },
+    "coding_standards": {
+      "score": 15,
+      "max": 15,
+      "checks": [
+        {
+          "name": "JS extends Plugin base class",
+          "status": "PASS",
+          "details": "Extends Plugin"
+        },
+        {
+          "name": "const vs let/var usage",
+          "status": "PASS",
+          "details": "No var usage"
+        },
+        {
+          "name": "declare(strict_types=1)",
+          "status": "PASS",
+          "details": "All 2 PHP files"
+        },
+        {
+          "name": "Type-hinted parameters",
+          "status": "PASS",
+          "details": "Type hints found"
+        },
+        {
+          "name": "Proper DI",
+          "status": "PASS",
+          "details": "Constructor injection configured"
+        },
+        {
+          "name": "Snippet keys vendor-prefixed",
+          "status": "PASS",
+          "details": "All keys prefixed"
+        },
+        {
+          "name": "Error handling",
+          "status": "PASS",
+          "details": "try-catch implemented"
+        },
+        {
+          "name": "Twig blocks properly structured",
+          "status": "PASS",
+          "details": "Proper sw_extends and block overrides"
+        }
+      ]
+    }
+  }
+}

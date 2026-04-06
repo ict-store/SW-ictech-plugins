@@ -109,6 +109,24 @@
             color: #15803d;
         }
 
+        /* Grade badges */
+        .grade {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .grade-a { background: #22c55e; }
+        .grade-b { background: #3b82f6; }
+        .grade-c { background: #f59e0b; }
+        .grade-d { background: #f97316; }
+        .grade-f { background: #ef4444; }
+
         /* View link */
         .view-link {
             color: #3b82f6;
@@ -154,18 +172,26 @@
         <thead>
             <tr>
                 <th>Plugin</th>
-                <th>Description</th>
+                <th>Type</th>
+                <th>Date</th>
                 <th>Version</th>
                 <th>Shopware</th>
+                <th>Score</th>
+                <th>Grade</th>
+                <th>Report</th>
                 <th>Repository</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>ICTECH_ListGridView</td>
-                <td>List view and Grid view for Product Listing Page</td>
+                <td>Plugin</td>
+                <td>2026-04-03</td>
                 <td><span class="version">v4.0.3</span></td>
                 <td><span class="compat">6.7+</span></td>
+                <td>98/100</td>
+                <td><span class="grade grade-a">A</span></td>
+                <td><a class="view-link" href="SHOPWARE-QA-REPORT-ictech-listgridview-20260403.html">View report</a></td>
                 <td><a class="view-link" href="https://github.com/ict-store/ICTECH_ListGridView" target="_blank">View repo</a></td>
             </tr>
         </tbody>

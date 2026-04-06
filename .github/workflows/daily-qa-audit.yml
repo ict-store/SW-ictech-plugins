@@ -68,7 +68,7 @@ jobs:
         run: |
           git config user.email "raj@icreativetechnologies.com"
           git config user.name "Raj@Bam1311"
-          rm -f qa-result.json
+          rm -rf qa-result.json plugin-source
           git add -A
           if git diff --cached --quiet; then
             echo "No changes to commit"

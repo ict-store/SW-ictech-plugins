@@ -1,0 +1,81 @@
+name: Daily QA Audit
+
+on:
+  schedule:
+    # Runs daily at 11:00 AM IST (5:30 AM UTC)
+    - cron: '30 5 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  qa-audit:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        plugin:
+          - name: ICTECH_ListGridView
+            repo: ict-store/ICTECH_ListGridView
+            version: v4.0.3
+            author: iCreativetechnologies
+
+    steps:
+      - name: Checkout dashboard repo
+        uses: actions/checkout@v4
+
+      - name: Clone plugin repo
+        run: |
+          git clone https://github.com/${{ matrix.plugin.repo }}.git plugin-source
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run QA Audit
+        env:
+          QA_OUTPUT: qa-result.json
+        run: |
+          python scripts/qa-audit.py plugin-source
+
+      - name: Generate Report & Update Dashboard
+        run: |
+          PLUGIN_NAME="${{ matrix.plugin.name }}"
+          VERSION="${{ matrix.plugin.version }}"
+          AUTHOR="${{ matrix.plugin.author }}"
+          REPO_URL="https://github.com/${{ matrix.plugin.repo }}"
+
+          python scripts/generate-report.py qa-result.json \
+            --plugin-name "$PLUGIN_NAME" \
+            --version "$VERSION" \
+            --author "$AUTHOR" \
+            --repo-url "$REPO_URL" \
+            --index-path index.html
+
+      - name: Read score
+        id: score
+        run: |
+          SCORE=$(python -c "import json; d=json.load(open('qa-result.json')); print(d['score'])")
+          GRADE=$(python -c "import json; d=json.load(open('qa-result.json')); print(d['grade'])")
+          echo "score=$SCORE" >> $GITHUB_OUTPUT
+          echo "grade=$GRADE" >> $GITHUB_OUTPUT
+          echo "Plugin: ${{ matrix.plugin.name }} — Score: $SCORE/100 Grade: $GRADE"
+
+      - name: Commit & Push if changed
+        run: |
+          git config user.email "raj@icreativetechnologies.com"
+          git config user.name "Raj@Bam1311"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "QA Audit: ${{ matrix.plugin.name }} — ${{ steps.score.outputs.score }}/100 Grade ${{ steps.score.outputs.grade }} ($(date +%Y-%m-%d))"
+            git push
+            echo "Dashboard updated!"
+          fi
+
+      - name: Cleanup
+        run: rm -rf plugin-source qa-result.json

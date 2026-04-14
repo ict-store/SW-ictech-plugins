@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopware QA Report — ICTECH_ListGridView</title>
+    <style>
+        :root { --pass: #22c55e; --fail: #ef4444; --warn: #f59e0b; --bg: #0f172a; --card: #1e293b; --text: #e2e8f0; --muted: #94a3b8; --border: #334155; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 2rem; }
+        .container { max-width: 960px; margin: 0 auto; }
+        h2 { font-size: 1.2rem; margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+        .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; padding: 1.5rem; background: var(--card); border-radius: 12px; border: 1px solid var(--border); }
+        .header-left h1 { color: #fff; font-size: 1.5rem; }
+        .header-left .meta { color: var(--muted); font-size: 0.85rem; margin-top: 0.5rem; }
+        .header-left .meta span { margin-right: 1.5rem; }
+        .grade-badge { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 700; color: #fff; background: #22c55e; flex-shrink: 0; }
+        .score-text { text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--muted); }
+        .categories { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+        .cat-card { background: var(--card); border-radius: 8px; padding: 1rem 1.25rem; border: 1px solid var(--border); }
+        .cat-card .cat-label { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .cat-card .cat-label span:last-child { color: var(--muted); }
+        .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+        .progress-bar .fill { height: 100%; border-radius: 4px; }
+        .fill-green { background: var(--pass); } .fill-blue { background: #3b82f6; } .fill-yellow { background: var(--warn); } .fill-red { background: var(--fail); }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 1.5rem; }
+        th { text-align: left; padding: 0.6rem 0.75rem; background: var(--card); color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--border); }
+        td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+        tr:hover td { background: rgba(255,255,255,0.02); }
+        .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+        .badge-pass { background: rgba(34,197,94,0.15); color: var(--pass); } .badge-fail { background: rgba(239,68,68,0.15); color: var(--fail); }
+        .footer { text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; }
+        @media (max-width: 640px) { .categories { grid-template-columns: 1fr; } .header { flex-direction: column; align-items: center; text-align: center; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="header-left">
+            <h1>ICTECH_ListGridView</h1>
+            <div class="meta">
+                <span>Version: v4.0.3</span>
+                <span>Shopware: 6.7+</span>
+                <span>Date: 2026-04-14</span>
+            </div>
+            <div class="meta" style="margin-top:0.25rem">
+                <span>Author: iCreativetechnologies</span>
+                <span>Type: shopware-platform-plugin</span>
+            </div>
+        </div>
+        <div>
+            <div class="grade-badge">A</div>
+            <div class="score-text">100 / 100</div>
+        </div>
+    </div>
+
+    <div class="categories">
+        <div class="cat-card">
+            <div class="cat-label"><span>Extension Structure</span><span>25 / 25</span></div>
+            <div class="progress-bar"><div class="fill fill-green" style="width:100%"></div></div>
+        </div>
+        <div class="cat-card">
+            <div class="cat-label"><span>Store Review</span><span>35 / 35</span></div>
+            <div class="progress-bar"><div class="fill fill-green" style="width:100%"></div></div>
+        </div>
+        <div class="cat-card">
+            <div class="cat-label"><span>Deprecated APIs</span><span>25 / 25</span></div>
+            <div class="progress-bar"><div class="fill fill-green" style="width:100%"></div></div>
+        </div>
+        <div class="cat-card">
+            <div class="cat-label"><span>Coding Standards</span><span>15 / 15</span></div>
+            <div class="progress-bar"><div class="fill fill-green" style="width:100%"></div></div>
+        </div>
+    </div>
+
+
+    <h2>Extension Structure &mdash; 25 / 25</h2>
+    <table>
+        <thead><tr><th>#</th><th>Check</th><th>Status</th><th>Details</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td>composer.json valid</td><td><span class="badge badge-pass">PASS</span></td><td>All required fields present</td></tr>
+            <tr><td>2</td><td>Plugin name present</td><td><span class="badge badge-pass">PASS</span></td><td>ict/ictechlistgridview</td></tr>
+            <tr><td>3</td><td>Plugin type correct</td><td><span class="badge badge-pass">PASS</span></td><td>shopware-platform-plugin</td></tr>
+            <tr><td>4</td><td>SemVer format</td><td><span class="badge badge-pass">PASS</span></td><td>v4.0.3</td></tr>
+            <tr><td>5</td><td>License declared</td><td><span class="badge badge-pass">PASS</span></td><td>proprietary</td></tr>
+            <tr><td>6</td><td>Author present</td><td><span class="badge badge-pass">PASS</span></td><td></td></tr>
+            <tr><td>7</td><td>Multilingual labels</td><td><span class="badge badge-pass">PASS</span></td><td>de-DE + en-GB</td></tr>
+            <tr><td>8</td><td>Multilingual descriptions</td><td><span class="badge badge-pass">PASS</span></td><td></td></tr>
+            <tr><td>9</td><td>Plugin icon exists</td><td><span class="badge badge-pass">PASS</span></td><td>ict.png</td></tr>
+            <tr><td>10</td><td>PSR-4 autoload</td><td><span class="badge badge-pass">PASS</span></td><td></td></tr>
+            <tr><td>11</td><td>CHANGELOG.md present</td><td><span class="badge badge-pass">PASS</span></td><td></td></tr>
+            <tr><td>12</td><td>CHANGELOG has dates</td><td><span class="badge badge-pass">PASS</span></td><td>Dates found</td></tr>
+            <tr><td>13</td><td>Manufacturer & support links</td><td><span class="badge badge-pass">PASS</span></td><td></td></tr>
+        </tbody>
+    </table>
+
+    <h2>Store Review &mdash; 35 / 35</h2>
+    <table>
+        <thead><tr><th>#</th><th>Check</th><th>Status</th><th>Details</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td>No hardcoded credentials</td><td><span class="badge badge-pass">PASS</span></td><td>Clean</td></tr>
+            <tr><td>2</td><td>No PHP debug output</td><td><span class="badge badge-pass">PASS</span></td><td>Clean</td></tr>
+            <tr><td>3</td><td>No console.log in JS source</td><td><span class="badge badge-pass">PASS</span></td><td>Clean</td></tr>
+            <tr><td>4</td><td>No console.log in JS dist</td><td><span class="badge badge-pass">PASS</span></td><td>Dist rebuilt clean</td></tr>
+            <tr><td>5</td><td>No eval/shell_exec</td><td><span class="badge badge-pass">PASS</span></td><td>Clean</td></tr>
+            <tr><td>6</td><td>No |raw filter in Twig</td><td><span class="badge badge-pass">PASS</span></td><td>Clean</td></tr>
+            <tr><td>7</td><td>Admin snippet files present</td><td><span class="badge badge-pass">PASS</span></td><td>en-GB: 2, de-DE: 2</td></tr>
+            <tr><td>8</td><td>Storefront snippet files present</td><td><span class="badge badge-pass">PASS</span></td><td>en: 1, de: 1</td></tr>
+            <tr><td>9</td><td>CSS via SCSS</td><td><span class="badge badge-pass">PASS</span></td><td>4 SCSS files</td></tr>
+            <tr><td>10</td><td>No inline styles in Twig</td><td><span class="badge badge-pass">PASS</span></td><td>Clean</td></tr>
+            <tr><td>11</td><td>No external HTTP requests</td><td><span class="badge badge-pass">PASS</span></td><td>Clean</td></tr>
+            <tr><td>12</td><td>Proper JS plugin registration</td><td><span class="badge badge-pass">PASS</span></td><td>PluginManager.register() found</td></tr>
+            <tr><td>13</td><td>Translatable JS strings</td><td><span class="badge badge-pass">PASS</span></td><td>data attributes with |trans used</td></tr>
+            <tr><td>14</td><td>CSP compliant</td><td><span class="badge badge-pass">PASS</span></td><td>No inline scripts/handlers</td></tr>
+        </tbody>
+    </table>
+
+    <h2>Deprecated Apis &mdash; 25 / 25</h2>
+    <table>
+        <thead><tr><th>#</th><th>Check</th><th>Status</th><th>Details</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td>config.xml XSD schema</td><td><span class="badge badge-pass">PASS</span></td><td>Uses trunk URL</td></tr>
+            <tr><td>2</td><td>routes.xml schema</td><td><span class="badge badge-pass">PASS</span></td><td>Symfony routing-1.0.xsd</td></tr>
+            <tr><td>3</td><td>services.xml schema</td><td><span class="badge badge-pass">PASS</span></td><td>Symfony services-1.0.xsd</td></tr>
+            <tr><td>4</td><td>No deprecated PHP classes</td><td><span class="badge badge-pass">PASS</span></td><td>All current APIs</td></tr>
+            <tr><td>5</td><td>Modern PHP routing</td><td><span class="badge badge-pass">PASS</span></td><td>PHP 8 #[Route()] attributes</td></tr>
+            <tr><td>6</td><td>Feature flag compatibility</td><td><span class="badge badge-pass">PASS</span></td><td>feature() used in Twig</td></tr>
+            <tr><td>7</td><td>No deprecated admin components</td><td><span class="badge badge-pass">PASS</span></td><td>Uses current registration API</td></tr>
+        </tbody>
+    </table>
+
+    <h2>Coding Standards &mdash; 15 / 15</h2>
+    <table>
+        <thead><tr><th>#</th><th>Check</th><th>Status</th><th>Details</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td>JS extends Plugin base class</td><td><span class="badge badge-pass">PASS</span></td><td>Extends Plugin</td></tr>
+            <tr><td>2</td><td>const vs let/var usage</td><td><span class="badge badge-pass">PASS</span></td><td>No var usage</td></tr>
+            <tr><td>3</td><td>declare(strict_types=1)</td><td><span class="badge badge-pass">PASS</span></td><td>All 2 PHP files</td></tr>
+            <tr><td>4</td><td>Type-hinted parameters</td><td><span class="badge badge-pass">PASS</span></td><td>Type hints found</td></tr>
+            <tr><td>5</td><td>Proper DI</td><td><span class="badge badge-pass">PASS</span></td><td>Constructor injection configured</td></tr>
+            <tr><td>6</td><td>Snippet keys vendor-prefixed</td><td><span class="badge badge-pass">PASS</span></td><td>All keys prefixed</td></tr>
+            <tr><td>7</td><td>Error handling</td><td><span class="badge badge-pass">PASS</span></td><td>try-catch implemented</td></tr>
+            <tr><td>8</td><td>Twig blocks properly structured</td><td><span class="badge badge-pass">PASS</span></td><td>Proper sw_extends and block overrides</td></tr>
+        </tbody>
+    </table>
+
+
+    <div class="footer">
+        Generated by Shopware QA Audit &mdash; 2026-04-14 &mdash; ICTECH_ListGridView v4.0.3
+    </div>
+</div>
+</body>
+</html>
